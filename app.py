@@ -8,7 +8,7 @@ st.header('Paiement releveur')
 st.subheader("bestie bb lem je t'aime de srx")
 
 ### --- LOAD DATAFRAME
-a=st.file_uploader("charger le paiement des releveurs", type="xlsx")
+a=st.file_uploader("charger le paiement des releveurs", type="xls")
 releveur=pd.read_excel(a)
 b=st.file_uploader("charger les compteurs", type="xlsx")
 compteurs=pd.read_excel(b) 
