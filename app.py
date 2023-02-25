@@ -58,10 +58,10 @@ st.plotly_chart(bar_chart)
 col1, col2 = st.beta_columns(2)
 image = Image.open('survey.jpg')
 print(image)
-col1.image(image,
+st.image(image,
         caption='Designed by slidesgo / Freepik',
         use_column_width=True)
-col2.dataframe(df[mask])
+st.dataframe(df[mask])
 
 # --- PLOT PIE CHART
 pie_chart = px.pie(df_participants,
