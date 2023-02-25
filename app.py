@@ -4,7 +4,7 @@ import plotly.express as px
 from PIL import Image
 from io import BytesIO
 import pip
-pip.main(['upgrade', 'streamlit'])
+pip.main(['install', 'streamlit'])
 
 st.set_page_config(page_title='paiement releveurs')
 st.header('Paiement releveur')
