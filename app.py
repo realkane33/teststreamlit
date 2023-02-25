@@ -5,7 +5,7 @@ from PIL import Image
 
 st.set_page_config(page_title='Survey Results')
 st.header('Survey Results 2021')
-st.subheader('Was the tutorial helpful?')
+st.subheader('bestie bb lem je t'aime de srx')
 
 ### --- LOAD DATAFRAME
 excel_file = 'Survey_Results.xlsx'
