@@ -55,7 +55,6 @@ def to_excel(df):
     processed_data = output.getvalue()
     return processed_data
 df_xlsx = to_excel(releveur)
-st.write(erreurs)
 st.write(releveur)
 st.download_button(label='📥 Download les  Resultats',
                                 data=df_xlsx ,
