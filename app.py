@@ -8,7 +8,7 @@ st.header('Survey Results 2021')
 st.subheader('Was the tutorial helpful?')
 
 ### --- LOAD DATAFRAME
-excel_file = 'C:/Users/KANE/Downloads/Excel_Webapp/Excel_Webapp/Survey_Results.xlsx'
+excel_file = 'Survey_Results.xlsx'
 sheet_name = 'DATA'
 
 df = pd.read_excel(excel_file,
@@ -56,7 +56,7 @@ st.plotly_chart(bar_chart)
 
 # --- DISPLAY IMAGE & DATAFRAME
 col1, col2 = st.columns(2)
-image = Image.open('C:/Users/KANE/Downloads/Excel_Webapp/Excel_Webapp/survey.jpg')
+image = Image.open('survey.jpg')
 print(image)
 col1.image(image,
         caption='Designed by slidesgo / Freepik',
