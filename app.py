@@ -8,8 +8,8 @@ st.header('Survey Results 2021')
 st.subheader("bestie bb lem je t'aime de srx")
 
 ### --- LOAD DATAFRAME
-st.file_uploader("charger le paiement des releveurs", type="xlsx")
-excel_file = 'Survey_Results.xlsx'
+a=st.file_uploader("charger le paiement des releveurs", type="xlsx")
+excel_file = a
 sheet_name = 'DATA'
 
 df = pd.read_excel(excel_file,
