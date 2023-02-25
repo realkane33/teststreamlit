@@ -20,7 +20,7 @@ b=[]
 erreur=[]
 print(a)
 for i in range (len(a)):
-	c=a[i].split(",")
+	c=str(a[i]).split(",")
 	b.insert(i,c)
 	n=[]
 i=0
