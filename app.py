@@ -55,7 +55,6 @@ bar_chart = px.bar(df_grouped,
 st.plotly_chart(bar_chart)
 
 # --- DISPLAY IMAGE & DATAFRAME
-col1, col2 = st.beta_columns(2)
 image = Image.open('survey.jpg')
 print(image)
 st.image(image,
