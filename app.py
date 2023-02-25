@@ -3,69 +3,53 @@ import streamlit as st
 import plotly.express as px
 from PIL import Image
 
-st.set_page_config(page_title='Survey Results')
-st.header('Survey Results 2021')
+st.set_page_config(page_title='paiement releveurs')
+st.header('Paiement releveur')
 st.subheader("bestie bb lem je t'aime de srx")
 
 ### --- LOAD DATAFRAME
 a=st.file_uploader("charger le paiement des releveurs", type="xlsx")
-excel_file = a
-sheet_name = 'DATA'
+releveur=pd.read_excel(a)
+b=st.file_uploader("charger les compteurs", type="xlsx")
+compteurs=pd.read_excel(b) 
+forage=compteurs["forage"]
+nombre=compteurs["nombre"]
+a=releveur["FORAGE"] 
+b=[]
+erreur=[]
 
-df = pd.read_excel(excel_file,
-                   sheet_name=sheet_name,
-                   usecols='B:D',
-                   header=3)
+for i in range (len(a)):
+	c=a[i].split(",")
+	b.insert(i,c)
+	n=[]
+i=0
+for objet in b:
+	k=0
+	
+	for site in objet:
+		try:
+			j=compteurs.loc[compteurs['forage'] ==site.lstrip().lower()]
+			
+			k+=j.iloc[0,1]
+         
+		except:
+			print(site.lstrip().lower()+" n existe pas sur la plateforme")
+			k="NA"
+			erreur.append(site.lstrip().lower())
 
-df_participants = pd.read_excel(excel_file,
-                                sheet_name= sheet_name,
-                                usecols='F:G',
-                                header=3)
-df_participants.dropna(inplace=True)
+	n.insert(i,k)
+	 
+	i+=1
+releveur["nombreC"]=n
+erreurs=pd.DataFrame()
+erreurs["sites"]=erreur
+releveur.to_excel("ncompteur.xlsx")
+erreurs.to_excel("sites mal orthographié.xlsx")
+			
+		
 
-# --- STREAMLIT SELECTION
-department = df['Department'].unique().tolist()
-ages = df['Age'].unique().tolist()
 
-age_selection = st.slider('Age:',
-                        min_value= min(ages),
-                        max_value= max(ages),
-                        value=(min(ages),max(ages)))
 
-department_selection = st.multiselect('Department:',
-                                    department,
-                                    default=department)
 
-# --- FILTER DATAFRAME BASED ON SELECTION
-mask = (df['Age'].between(*age_selection)) & (df['Department'].isin(department_selection))
-number_of_result = df[mask].shape[0]
-st.markdown(f'*Available Results: {number_of_result}*')
 
-# --- GROUP DATAFRAME AFTER SELECTION
-df_grouped = df[mask].groupby(by=['Rating']).count()[['Age']]
-df_grouped = df_grouped.rename(columns={'Age': 'Votes'})
-df_grouped = df_grouped.reset_index()
 
-# --- PLOT BAR CHART
-bar_chart = px.bar(df_grouped,
-                   x='Rating',
-                   y='Votes',
-                   text='Votes',
-                   color_discrete_sequence = ['#F63366']*len(df_grouped),
-                   template= 'plotly_white')
-st.plotly_chart(bar_chart)
-
-# --- DISPLAY IMAGE & DATAFRAME
-image = Image.open('survey.jpg')
-print(image)
-st.image(image,
-        caption='Designed by slidesgo / Freepik',
-        use_column_width=True)
-
-# --- PLOT PIE CHART
-pie_chart = px.pie(df_participants,
-                title='Total No. of Participants',
-                values='Participants',
-                names='Departments')
-
-st.plotly_chart(pie_chart)
