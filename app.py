@@ -8,6 +8,7 @@ st.header('Survey Results 2021')
 st.subheader("bestie bb lem je t'aime de srx")
 
 ### --- LOAD DATAFRAME
+st.file_uploader("charger le paiement des releveurs", type=xlsx)
 excel_file = 'Survey_Results.xlsx'
 sheet_name = 'DATA'
 
@@ -60,7 +61,6 @@ print(image)
 st.image(image,
         caption='Designed by slidesgo / Freepik',
         use_column_width=True)
-st.dataframe(df[mask])
 
 # --- PLOT PIE CHART
 pie_chart = px.pie(df_participants,
