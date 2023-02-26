@@ -3,6 +3,7 @@ import streamlit as st
 import plotly.express as px
 from PIL import Image
 from io import BytesIO
+
 st.set_page_config(page_title='paiement releveurs')
 st.header('Paiement releveur')
 st.subheader("test test")
@@ -19,7 +20,7 @@ b=[]
 erreur=[]
 print(a)
 for i in range (len(a)):
-	c=str(a[i]).split(",")
+	c=a[i].split(",")
 	b.insert(i,c)
 	n=[]
 i=0
@@ -54,6 +55,8 @@ def to_excel(df):
     processed_data = output.getvalue()
     return processed_data
 df_xlsx = to_excel(releveur)
+st.write(erreurs)
+st.write(releveur)
 st.download_button(label='📥 Download les  Resultats',
                                 data=df_xlsx ,
                                 file_name= 'df_test.xlsx')
